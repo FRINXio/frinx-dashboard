@@ -1,0 +1,25 @@
+@font-face {
+  font-family: 'Gotham Book';
+  font-style: normal;
+  src: url('./fonts/GOTHW___.TTF') format('truetype');
+}
+
+@font-face {
+  font-family: 'Gotham Book';
+  font-style: normal;
+  font-weight: bold;
+  src: url('./fonts/GOTHB___.TTF') format('truetype');
+}
+
+body {
+  background-color: white;
+  font-family: 'Gotham Book';
+}
+
+.col {
+  text-align: center;
+}
+
+.logo img {
+  width: 400px;
+}
