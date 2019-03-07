@@ -9,12 +9,11 @@ import logoWhite from '../img/logoWhite.png';
 class Login extends Component {
     constructor(props){
         super(props);
-        this.signIn = this.signIn.bind(this);
         library.add(faUser, faLock);
-    }
-    
-    signIn(){
-        
+        this.state = {
+            activeUsername: false,
+            activePassword: false
+        }
     }
 
     render(){
@@ -27,25 +26,25 @@ class Login extends Component {
                         <div className="loginWindow">
                         <h1>Sign in</h1>
                         <center>
-                        <InputGroup className="input-user pretty-feild paddedFeild">
+                        <InputGroup className={!this.activeUsername ? "input-user pretty-feild paddedFeild" : "input-user pretty-feild paddedFeild focusedInput"}>
                             <InputGroup.Prepend>
-                                <InputGroup.Text id="basic-addon1"><FontAwesomeIcon icon={faUser} /></InputGroup.Text>
+                                <InputGroup.Text id="user-addon"><FontAwesomeIcon icon={faUser} /></InputGroup.Text>
                             </InputGroup.Prepend>
-                            <input type="text" placeholder="Username" />
+                            <input onFocus={() => {this.setState({activeUsername: true})}} onBlur={() => {this.setState({activeUsername: false})}} type="text" placeholder="Username" />
                         </InputGroup>
                         <InputGroup className="input-password pretty-feild paddedFeild">
                             <InputGroup.Prepend>
-                                <InputGroup.Text id="basic-addon2"><FontAwesomeIcon icon={faLock} /></InputGroup.Text>
+                                <InputGroup.Text id="password-addon"><FontAwesomeIcon icon={faLock} /></InputGroup.Text>
                             </InputGroup.Prepend>
                             <input type="password" placeholder="Password" />
                         </InputGroup>
                         </center>
-                        <Button variant="primary" onClick={this.signIn()} className="paddedButton">
+                        <Button variant="primary" onClick={this.props.logIn} className="paddedButton">
                             Sign in
                         </Button>
                         <a href="#"><div className="smallText">Forgot your password?</div></a>
                         <br /> or<br />
-                        <Button variant="primary" onClick={this.signIn()} className="paddedButton">
+                        <Button variant="primary" onClick={this.props.logIn} className="paddedButton">
                             Sign in using Facebook
                         </Button>
                         </div>

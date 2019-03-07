@@ -37,7 +37,7 @@ class Panel extends Component {
                     <div className="goButton"><FontAwesomeIcon icon={faPlay} /></div>
                 </div>
             ) : (
-                <div className="panel disabled">
+                <div style={{boxShadow: "none"}} className="panel disabled">
                     <div className="title">{this.props.title}</div>
                 </div>
             )}

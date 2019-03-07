@@ -44,7 +44,7 @@ class Header extends Component {
                     {this.getGreeting()}, <b>{this.getName()}</b><br />gweiser@frinx.io
                     </Navbar.Text>
                     <Nav>
-                        <Nav.Link href="#"><FontAwesomeIcon icon="sign-out-alt" /></Nav.Link>
+                        <Nav.Link href="#" onClick={this.props.logOut}><FontAwesomeIcon icon="sign-out-alt" /></Nav.Link>
                     </Nav>
                 </Navbar.Collapse>
             </Navbar>
