@@ -41,7 +41,7 @@ class Header extends Component {
                 <Navbar.Toggle />
                 <Navbar.Collapse className="justify-content-end">
                     <Navbar.Text style={{textAlign: 'right'}}>
-                    {this.getGreeting()}, <b>{this.getName()}</b><br />gweiser@frinx.io
+                    {this.getGreeting()}, <b>{this.getName()}</b><br />gwieser@frinx.io
                     </Navbar.Text>
                     <Nav>
                         <Nav.Link href="#" onClick={this.props.logOut}><FontAwesomeIcon icon="sign-out-alt" /></Nav.Link>
