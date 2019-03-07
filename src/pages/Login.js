@@ -1,10 +1,16 @@
 import React, { Component } from 'react';
 import './Login.css';
-import { Container, Button, Form, Col, Row} from 'react-bootstrap';
+import { Container, Button, Form, Col, Row, InputGroup } from 'react-bootstrap';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUser, faLock } from '@fortawesome/free-solid-svg-icons';
+import logoWhite from '../img/logoWhite.png';
 
 class Login extends Component {
     constructor(props){
+        super(props);
         this.signIn = this.signIn.bind(this);
+        library.add(faUser, faLock);
     }
     
     signIn(){
@@ -13,53 +19,58 @@ class Login extends Component {
 
     render(){
         return(
+            
             <Container>
+                <div className="accessPanel">
                 <Row>
-                    <Col>
+                    <Col className="whiteBg" xs="7">
                         <div className="loginWindow">
                         <h1>Sign in</h1>
-                        <Form>
-                        <Form.Group controlId="formBasicEmail">
-                            <Form.Label>Username</Form.Label>
-                            <Form.Control type="text" placeholder="" />
-                            <Form.Text className="text-muted">
-                            You can also use the email address you provided.
-                            </Form.Text>
-                        </Form.Group>
-
-                        <Form.Group controlId="formBasicPassword">
-                            <Form.Label>Password</Form.Label>
-                            <Form.Control type="password" placeholder="" />
-                        </Form.Group>
-                        <Form.Group controlId="formBasicChecbox">
-                            <Form.Check type="checkbox" label="Remember me on this computer" />
-                        </Form.Group>
-                        <Button variant="primary" onClick={signIn()}>
+                        <center>
+                        <InputGroup className="input-user pretty-feild paddedFeild">
+                            <InputGroup.Prepend>
+                                <InputGroup.Text id="basic-addon1"><FontAwesomeIcon icon={faUser} /></InputGroup.Text>
+                            </InputGroup.Prepend>
+                            <input type="text" placeholder="Username" />
+                        </InputGroup>
+                        <InputGroup className="input-password pretty-feild paddedFeild">
+                            <InputGroup.Prepend>
+                                <InputGroup.Text id="basic-addon2"><FontAwesomeIcon icon={faLock} /></InputGroup.Text>
+                            </InputGroup.Prepend>
+                            <input type="password" placeholder="Password" />
+                        </InputGroup>
+                        </center>
+                        <Button variant="primary" onClick={this.signIn()} className="paddedButton">
                             Sign in
                         </Button>
                         <a href="#"><div className="smallText">Forgot your password?</div></a>
-                        </Form>
+                        <br /> or<br />
+                        <Button variant="primary" onClick={this.signIn()} className="paddedButton">
+                            Sign in using Facebook
+                        </Button>
                         </div>
                         <br />
                         <br />
                     </Col>
-                    <Col>
+                    <Col className="gradientBg" xs="5">
                         <div className="registerWindow">
                         <h1>Sign up</h1>
                         Don't have an account yet? You can:<br />
-                        <Button className="btn-margin" variant="primary" type="submit">
-                            Login with Facebook
+                        <Button className="btn-margin" variant="outline-light" type="submit">
+                            Sign up using Facebook
                         </Button><br />
                         or<br />
-                        <Button className="btn-margin" variant="default">
+                        <Button className="btn-margin" variant="outline-light">
                             Register as a new user
                         </Button>
+                        <br />
+                        <a href="https://frinx.io"><img className="logo" src={logoWhite}></img></a>
                         </div>
-                        <div className="notice">© 2019 <a href="https://frinx.io">FRINX</a></div>
                     </Col>
                 </Row>
-                
+                </div>
             </Container>
+            
         )
     }
 }
