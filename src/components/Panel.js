@@ -13,16 +13,20 @@ class Panel extends Component {
             library.add(this.props.icon);
         }
         this.state = {
-            hover: false
+            highlight: false
         }
     }
 
     hoverAction() {
-        
+        this.setState({
+            highlight: true
+        });
     }
 
     hoverOver() {
-
+        this.setState({
+            highlight: false
+        });
     }
 
     render() {
@@ -30,11 +34,11 @@ class Panel extends Component {
         return (
             <a href={this.props.link}>
             {!disabled ? (
-                <div className="panel" style={this.props.style} onMouseEnter={this.hoverAction()} onMouseLeave={this.hoverOver()}>
+                <div className="panel" style={this.props.style} onMouseEnter={() => this.hoverAction()} onMouseLeave={() => this.hoverOver()}>
                     <div className="title">{this.props.title}</div>
                     <div className="desc">{this.props.desc}</div>
-                    <div className="icon"><FontAwesomeIcon icon={this.props.icon} /></div>
-                    <div className="goButton"><FontAwesomeIcon icon={faPlay} /></div>
+                    <div className={!this.state.highlight ? 'icon' : 'icon lightened'}><FontAwesomeIcon icon={this.props.icon} /></div>
+                    <div className={!this.state.highlight ? 'goButton' : 'goButton highlighted'}><FontAwesomeIcon icon={faPlay} /></div>
                 </div>
             ) : (
                 <div style={{boxShadow: "none"}} className="panel disabled">

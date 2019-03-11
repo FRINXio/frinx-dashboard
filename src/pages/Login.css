@@ -8,13 +8,13 @@
     opacity: 0.5;
     width: 180px;
     margin-top: 30px;
-    transition: 0.5s opacity;
+    transition: 0.25s opacity;
 }
 
 .logo:hover {
     cursor: pointer;
     opacity: 0.75;
-    transition: 0.5s opacity;
+    transition: 0.25s opacity;
 }
 
 .loginWindow {
@@ -114,5 +114,5 @@ h1 {
 .focusedInput input,
 .focusedInput .input-group-text {
     background-color: #d8d8d8 !important;
-    transition: 0.5s background;
+    transition: 0.25s background;
 }
