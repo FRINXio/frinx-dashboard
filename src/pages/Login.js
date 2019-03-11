@@ -26,17 +26,17 @@ class Login extends Component {
                         <div className="loginWindow">
                         <h1>Sign in</h1>
                         <center>
-                        <InputGroup className={!this.activeUsername ? "input-user pretty-feild paddedFeild" : "input-user pretty-feild paddedFeild focusedInput"}>
+                        <InputGroup className={!this.state.activeUsername ? "input-user pretty-feild paddedFeild" : "input-user pretty-feild paddedFeild focusedInput"}>
                             <InputGroup.Prepend>
                                 <InputGroup.Text id="user-addon"><FontAwesomeIcon icon={faUser} /></InputGroup.Text>
                             </InputGroup.Prepend>
                             <input onFocus={() => {this.setState({activeUsername: true})}} onBlur={() => {this.setState({activeUsername: false})}} type="text" placeholder="Username" />
                         </InputGroup>
-                        <InputGroup className="input-password pretty-feild paddedFeild">
+                        <InputGroup className={!this.state.activePassword ? "input-password pretty-feild paddedFeild" : "input-password pretty-feild paddedFeild focusedInput"}>
                             <InputGroup.Prepend>
                                 <InputGroup.Text id="password-addon"><FontAwesomeIcon icon={faLock} /></InputGroup.Text>
                             </InputGroup.Prepend>
-                            <input type="password" placeholder="Password" />
+                            <input onFocus={() => {this.setState({activePassword: true})}} onBlur={() => {this.setState({activePassword: false})}} type="password" placeholder="Password" />
                         </InputGroup>
                         </center>
                         <Button variant="primary" onClick={this.props.logIn} className="paddedButton">

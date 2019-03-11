@@ -89,6 +89,7 @@ h1 {
 
 .pretty-feild input,
 .pretty-feild .input-group-text {
+    transition: 0.5s background;
     margin-top: 10px;
     outline: none;
     background-color: #ececec;
@@ -113,4 +114,5 @@ h1 {
 .focusedInput input,
 .focusedInput .input-group-text {
     background-color: #d8d8d8 !important;
+    transition: 0.5s background;
 }
