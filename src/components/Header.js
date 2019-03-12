@@ -37,7 +37,7 @@ class Header extends Component {
     render(){
         return (
             <Navbar className="navbar">
-                <Navbar.Brand><img alt='' src={logo}></img></Navbar.Brand>
+                <Navbar.Brand><a href="http://localhost:3000"><img alt='' src={logo}></img></a></Navbar.Brand>
                 <Navbar.Toggle />
                 <Navbar.Collapse className="justify-content-end">
                     <Navbar.Text style={{textAlign: 'right'}}>
