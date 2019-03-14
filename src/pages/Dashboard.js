@@ -18,8 +18,8 @@ class Dashboard extends Component {
                     <Row>
                         <Col><Panel title='Inventory' desc="Create, view and organize assets." icon={faBoxOpen} style={{background: 'linear-gradient'}} link='http://localhost:3000/kibana' /></Col>
                         <Col><Panel title='Logs' desc="View system logs." icon={faLayerGroup} style={{background: 'linear-gradient'}} link='http://localhost:3000/kibana' /></Col>
-                        <Col><Panel title='User Managment' desc="Manage users and permissions." icon={faUsers} style={{background: 'linear-gradient'}} link='#' /></Col>
-                        <Col><Panel disabled={true} title='More coming soon' link='https://frinx.io/' /></Col>
+                        <Col><Panel disabled={true} title='User Managment' desc="Manage users and permissions." icon={faUsers} style={{background: 'linear-gradient'}} link='#' /></Col>
+                        <Col></Col>
                     </Row>
             </Container>
         )}

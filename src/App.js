@@ -9,28 +9,25 @@ class App extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {
-      loggedIn: false
+    if(localStorage.getItem('loggedIn') === null){
+      localStorage.setItem('loggedIn', false)
     }
   }
   
   routes = [
-            { path: "conductor", page: <div className="App"><Header logOut={this.goToDashboard} /><Viewframe title="Conductor" src="http://www.example.org" /></div>},
-            { path: "kibana", page : <div className="App"><Header logOut={this.goToDashboard} /><Viewframe title="Kibana" src="http://www.example.org" /></div>},
-            { path: "frinxit", page : <div className="App"><Header logOut={this.goToDashboard} /><Viewframe title="FrinxIt" src="http://www.example.org" /></div> },
-            { path: "header", page: <div className="App"><Header logOut={this.goToDashboard} /></div> }
+            { path: "conductor", page: <div className="App"><Header logOut={this.logOut} /><Viewframe title="Conductor" src="http://localhost:5000" /></div>},
+            { path: "kibana", page : <div className="App"><Header logOut={this.logOut} /><Viewframe title="Kibana" src="http://localhost:5601/app/kibana" /></div>},
+            { path: "frinxit", page : <div className="App"><Header logOut={this.logOut} /><Viewframe title="FrinxIt" src="http://localhost:8888" /></div> },
+            { path: "header", page: <div className="App"><Header logOut={this.logOut} /></div> }
   ]
 
   logIn = () => {
-    this.setState({
-      loggedIn: true
-    })
+    localStorage.setItem('loggedIn', true)
+    window.location.href = 'http://localhost:3000';
   }
 
   logOut = () => {
-    this.setState({
-      loggedIn: false
-    })
+    localStorage.setItem('loggedIn', false)
     window.location.href = 'http://localhost:3000';
   }
 
@@ -54,7 +51,7 @@ class App extends Component {
       )
     } else {
       //if url points to '/' or anyhting else, redirect to login screen or dashboard
-      if(this.state.loggedIn){
+      if(localStorage.getItem('loggedIn') === "true"){
         return (
           <div className="App">
             <Header logOut={this.logOut} />
@@ -64,7 +61,7 @@ class App extends Component {
       } else {
         return (
           <div className="App">
-            <Login loggedIn={this.state.loggedIn} logIn={this.logIn} />
+            <Login loggedIn={this.logIn} logIn={this.logIn} />
           </div>
         );
       }

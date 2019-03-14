@@ -70,7 +70,15 @@ a:hover {
     background: linear-gradient(324deg, rgba(232,232,232,1) 0%, rgba(204,204,204,1) 100%);
 }
 
+.disabled:hover {
+    cursor: not-allowed;
+}
+
 .disabled .title {
+    color: #767676;
+}
+
+.disabled .desc {
     color: #767676;
 }
 

@@ -19,6 +19,11 @@ class Header extends Component {
     return "Gerhard"
     }
 
+    logOut() {
+        localStorage.setItem('loggedIn', false)
+        window.location.href = 'http://localhost:3000';
+    }
+
     getGreeting(){
     let d = new Date();
     let time = d.getHours();
@@ -44,7 +49,7 @@ class Header extends Component {
                     {this.getGreeting()}, <b>{this.getName()}</b><br />gwieser@frinx.io
                     </Navbar.Text>
                     <Nav>
-                        <Nav.Link href="#" onClick={this.props.logOut}><FontAwesomeIcon icon="sign-out-alt" /></Nav.Link>
+                        <Nav.Link href="#" onClick={this.logOut}><FontAwesomeIcon icon="sign-out-alt" /></Nav.Link>
                     </Nav>
                 </Navbar.Collapse>
             </Navbar>

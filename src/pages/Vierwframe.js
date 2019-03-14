@@ -7,17 +7,23 @@ class Viewframe extends Component {
         super(props);
     }
     
+    updateUrl(e) {
+        //placeholder
+    }
+
     render() {
         return (
             <div>
-            <iframe title="viewframe"
+            <iframe 
+            onLoad={this.updateUrl}
+            title="viewframe"
             className="frame"
             src={this.props.src}
             />
-            <div class="loading">
+            <div className="loading">
                 <ClimbingBoxLoader color={'#AFAFAF'} />
             </div>
-            <div class="loading-text">
+            <div className="loading-text">
                 Loading {this.props.title}
             </div>
             </div>

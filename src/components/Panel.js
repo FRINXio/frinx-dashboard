@@ -43,6 +43,8 @@ class Panel extends Component {
             ) : (
                 <div style={{boxShadow: "none"}} className="panel disabled">
                     <div className="title">{this.props.title}</div>
+                    <div className="desc">{this.props.desc}</div>
+                    <div className={!this.state.highlight ? 'icon' : 'icon lightened'}><FontAwesomeIcon icon={this.props.icon} /></div>
                 </div>
             )}
             </a>
