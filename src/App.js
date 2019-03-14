@@ -23,12 +23,12 @@ class App extends Component {
 
   logIn = () => {
     localStorage.setItem('loggedIn', true)
-    window.location.href = '%PUBLIC_URL%:3000';
+    window.location.href = "http://"+window.location.hostname+":3000";
   }
 
   logOut = () => {
     localStorage.setItem('loggedIn', false)
-    window.location.href = '%PUBLIC_URL%:3000';
+    window.location.href = "http://"+window.location.hostname+":3000";
   }
 
   goToDashboard = () => {
