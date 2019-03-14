@@ -21,7 +21,7 @@ class Header extends Component {
 
     logOut() {
         localStorage.setItem('loggedIn', false)
-        window.location.href = 'http://localhost:3000';
+        window.location.href = '%PUBLIC_URL%:3000';
     }
 
     getGreeting(){
@@ -42,7 +42,7 @@ class Header extends Component {
     render(){
         return (
             <Navbar className="navbar">
-                <Navbar.Brand><a href="http://localhost:3000"><img alt='' src={logo}></img></a></Navbar.Brand>
+                <Navbar.Brand><a href="%PUBLIC_URL%:3000"><img alt='' src={logo}></img></a></Navbar.Brand>
                 <Navbar.Toggle />
                 <Navbar.Collapse className="justify-content-end">
                     <Navbar.Text style={{textAlign: 'right'}}>

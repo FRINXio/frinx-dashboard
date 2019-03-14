@@ -15,20 +15,20 @@ class App extends Component {
   }
   
   routes = [
-            { path: "conductor", page: <div className="App"><Header logOut={this.logOut} /><Viewframe title="Conductor" src="http://localhost:5000" /></div>},
-            { path: "kibana", page : <div className="App"><Header logOut={this.logOut} /><Viewframe title="Kibana" src="http://localhost:5601/app/kibana" /></div>},
-            { path: "frinxit", page : <div className="App"><Header logOut={this.logOut} /><Viewframe title="FrinxIt" src="http://localhost:8888" /></div> },
+            { path: "conductor", page: <div className="App"><Header logOut={this.logOut} /><Viewframe title="Conductor" src="%PUBLIC_URL%:5000" /></div>},
+            { path: "kibana", page : <div className="App"><Header logOut={this.logOut} /><Viewframe title="Kibana" src="%PUBLIC_URL%:5601/app/kibana" /></div>},
+            { path: "frinxit", page : <div className="App"><Header logOut={this.logOut} /><Viewframe title="FrinxIt" src="%PUBLIC_URL%:8888" /></div> },
             { path: "header", page: <div className="App"><Header logOut={this.logOut} /></div> }
   ]
 
   logIn = () => {
     localStorage.setItem('loggedIn', true)
-    window.location.href = 'http://localhost:3000';
+    window.location.href = '%PUBLIC_URL%:3000';
   }
 
   logOut = () => {
     localStorage.setItem('loggedIn', false)
-    window.location.href = 'http://localhost:3000';
+    window.location.href = '%PUBLIC_URL%:3000';
   }
 
   goToDashboard = () => {

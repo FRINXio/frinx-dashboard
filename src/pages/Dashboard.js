@@ -10,14 +10,14 @@ class Dashboard extends Component {
         return (
             <Container>
                     <Row>
-                        <Col><Panel title='Services' desc="Browse and execute services." icon={faBookOpen} style={{background: 'linear-gradient'}} link='http://localhost:3000/conductor/#/workflow/metadata' /></Col>
-                        <Col><Panel title='Workflows' desc="Create, organize and execute workflows." icon={faCogs} style={{background: 'linear-gradient'}} link='http://localhost:3000/conductor/#/workflow/metadata' /></Col>
-                        <Col><Panel title='Tasks' desc="Manage tasks." icon={faTasks} style={{background: 'linear-gradient'}} link='http://localhost:3000/conductor/#/workflow/metadata/tasks' /></Col>
-                        <Col><Panel title='UniConfig Console' desc="Manage network device configurations." icon={faLaptopCode} style={{background: 'linear-gradient'}} link='http://localhost:3000/frinxit' /></Col>
+                        <Col><Panel title='Services' desc="Browse and execute services." icon={faBookOpen} style={{background: 'linear-gradient'}} link='/conductor/#/workflow/metadata' /></Col>
+                        <Col><Panel title='Workflows' desc="Create, organize and execute workflows." icon={faCogs} style={{background: 'linear-gradient'}} link='/conductor/#/workflow/metadata' /></Col>
+                        <Col><Panel title='Tasks' desc="Manage tasks." icon={faTasks} style={{background: 'linear-gradient'}} link='/conductor/#/workflow/metadata/tasks' /></Col>
+                        <Col><Panel title='UniConfig Console' desc="Manage network device configurations." icon={faLaptopCode} style={{background: 'linear-gradient'}} link='/frinxit' /></Col>
                     </Row>
                     <Row>
-                        <Col><Panel title='Inventory' desc="Create, view and organize assets." icon={faBoxOpen} style={{background: 'linear-gradient'}} link='http://localhost:3000/kibana' /></Col>
-                        <Col><Panel title='Logs' desc="View system logs." icon={faLayerGroup} style={{background: 'linear-gradient'}} link='http://localhost:3000/kibana' /></Col>
+                        <Col><Panel title='Inventory' desc="Create, view and organize assets." icon={faBoxOpen} style={{background: 'linear-gradient'}} link='/kibana' /></Col>
+                        <Col><Panel title='Logs' desc="View system logs." icon={faLayerGroup} style={{background: 'linear-gradient'}} link='/kibana' /></Col>
                         <Col><Panel disabled={true} title='User Managment' desc="Manage users and permissions." icon={faUsers} style={{background: 'linear-gradient'}} link='#' /></Col>
                         <Col></Col>
                     </Row>
