@@ -15,9 +15,9 @@ class App extends Component {
   }
   
   routes = [
-            { path: "conductor", page: <div className="App"><Header logOut={this.logOut} /><Viewframe title="Conductor" src="%PUBLIC_URL%:5000" /></div>},
-            { path: "kibana", page : <div className="App"><Header logOut={this.logOut} /><Viewframe title="Kibana" src="%PUBLIC_URL%:5601/app/kibana" /></div>},
-            { path: "frinxit", page : <div className="App"><Header logOut={this.logOut} /><Viewframe title="FrinxIt" src="%PUBLIC_URL%:8888" /></div> },
+            { path: "conductor", page: <div className="App"><Header logOut={this.logOut} /><Viewframe title="Conductor" src={window.location.hostname+":5000"} /></div>},
+            { path: "kibana", page : <div className="App"><Header logOut={this.logOut} /><Viewframe title="Kibana" src={window.location.hostname+":5601/app/kibana"} /></div>},
+            { path: "frinxit", page : <div className="App"><Header logOut={this.logOut} /><Viewframe title="FrinxIt" src={window.location.hostname+":8888"} /></div> },
             { path: "header", page: <div className="App"><Header logOut={this.logOut} /></div> }
   ]
 
