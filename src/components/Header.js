@@ -11,16 +11,14 @@ class Header extends Component {
         super(props);
         library.add(faSignOutAlt);
         this.state = {
-
+            username: this.props.username,
+            useremail: this.props.useremail
         }
-    }
-    
-    getName(){
-    return "Gerhard"
     }
 
     logOut() {
-        localStorage.setItem('loggedIn', false)
+        localStorage.setItem('loggedIn', false);
+        localStorage.clear();
         window.location.href = "http://"+window.location.hostname+":3000";
     }
 
@@ -46,7 +44,7 @@ class Header extends Component {
                 <Navbar.Toggle />
                 <Navbar.Collapse className="justify-content-end">
                     <Navbar.Text style={{textAlign: 'right'}}>
-                    {this.getGreeting()}, <b>{this.getName()}</b><br />gwieser@frinx.io
+                    {this.getGreeting()}, <b>{this.state.username}</b><br />{this.state.useremail}
                     </Navbar.Text>
                     <Nav>
                         <Nav.Link href="#" onClick={this.logOut}><FontAwesomeIcon icon="sign-out-alt" /></Nav.Link>
