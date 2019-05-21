@@ -3,8 +3,11 @@ import './Login.css';
 import {Button, Col, Container, Form, InputGroup, Row} from 'react-bootstrap';
 import {library} from '@fortawesome/fontawesome-svg-core';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import {faLock, faUser} from '@fortawesome/free-solid-svg-icons';
+import {faLock, faUser, faTimes} from '@fortawesome/free-solid-svg-icons';
 import logoWhite from '../img/logoWhite.png';
+import Papa from 'papaparse/papaparse.min.js';
+import csvFilePath from '../data/users.csv';
+import passwordHash from 'password-hash';
 
 class Login extends Component {
 
@@ -17,7 +20,8 @@ class Login extends Component {
             activePassword: false,
             password: '',
             username: '',
-            csvData: ''
+            csvData: '',
+            showNotice: false
         };
         this.setUsername = this.setUsername.bind(this);
         this.setPassword = this.setPassword.bind(this);
@@ -26,8 +30,6 @@ class Login extends Component {
     }
 
     componentWillMount() {
-        var csvFilePath = require("../data/users.csv");
-        var Papa = require("papaparse/papaparse.min.js");
         Papa.parse(csvFilePath, {
             header: true,
             download: true,
@@ -52,8 +54,7 @@ class Login extends Component {
         let useremail = "";
         data.forEach(item => {
             if (username === item.name || username === item.email) {
-                console.log(item);
-                if (password === item.password) {
+                if (passwordHash.verify(password, item.password)) {
                     username = item.name;
                     useremail = item.email;
                     authentication = true;
@@ -67,7 +68,9 @@ class Login extends Component {
             localStorage.setItem('name', username);
             window.location.href = "http://"+window.location.hostname+":3000";
         } else {
-            alert("Wrong name or password");
+            this.setState({
+                showNotice: true
+            })
         }
     };
 
@@ -104,6 +107,9 @@ class Login extends Component {
                                 </InputGroup>
                             </Form>
                         </center>
+                            <div className={ this.state.showNotice ? 'wrongLogin' : 'hidden'}>
+                                <FontAwesomeIcon icon={faTimes} /> Wrong username or password
+                            </div>
                         <Button variant="primary" onClick={this.logIn} className="paddedButton">
                             Sign in
                         </Button>

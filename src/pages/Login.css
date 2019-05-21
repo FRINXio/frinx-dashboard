@@ -116,3 +116,9 @@ h1 {
     background-color: #d8d8d8 !important;
     transition: 0.25s background;
 }
+.hidden {
+    visibility: hidden;
+}
+.wrongLogin {
+    color: firebrick;
+}
