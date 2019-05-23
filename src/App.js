@@ -4,6 +4,7 @@ import Header from './components/Header';
 import Dashboard from './pages/Dashboard';
 import Login from './pages/Login';
 import Viewframe from './pages/Vierwframe';
+import Registration from './pages/Registration';
 
 class App extends Component {
 
@@ -63,7 +64,7 @@ class App extends Component {
       }
     }
 
-    if(routeWhich != -1) {
+    if(routeWhich !== -1) {
       //redirect to correct route if url points to one
       return (
           <div className="App">
@@ -81,11 +82,19 @@ class App extends Component {
           </div>
         );
       } else {
-        return (
-          <div className="App">
-            <Login loggedIn={this.logIn} logIn={this.logIn} />
-          </div>
-        );
+          if(window.location.pathname.split("/")[1] === "registration") {
+              return (
+                  <div className="App">
+                      <Registration />
+                  </div>
+              );
+          } else {
+              return (
+                  <div className="App">
+                      <Login loggedIn={this.logIn} logIn={this.logIn}/>
+                  </div>
+              );
+          }
       }
     }
   }

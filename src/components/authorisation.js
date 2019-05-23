@@ -34,11 +34,12 @@ export function getLoginData() {
     }
 }
 
-export function registration(data, username, password) {
-    let object = {};
-    object.name = username;
-    object.email = username;
-    object.password = passwordHash.generate(password);
+export function registration(data, username, email, password) {
+    let object = {
+        name: username,
+        email: email,
+        password: passwordHash.generate(password)
+    };
 
     if(!data.some( array => array.name === username)) {
         data.push(object);
@@ -51,7 +52,7 @@ export function registration(data, username, password) {
 
         let blob = new Blob([toCSV(data,headers,",","")]);
 
-        var a = window.document.createElement("a");
+        let a = window.document.createElement("a");
         a.href = window.URL.createObjectURL(blob, {type: "text/csv"});
         a.download = "users.csv";
         document.body.appendChild(a);

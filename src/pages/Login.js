@@ -5,7 +5,7 @@ import {library} from '@fortawesome/fontawesome-svg-core';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faLock, faUser, faTimes} from '@fortawesome/free-solid-svg-icons';
 import logoWhite from '../img/logoWhite.png';
-import {authorisation, getLoginData, registration} from "../components/authorisation";
+import {authorisation, getLoginData} from "../components/authorisation";
 
 class Login extends Component {
 
@@ -18,7 +18,6 @@ class Login extends Component {
             password: '',
             username: '',
             loginData: [],
-            showNotice: false,
             error: ''
         };
         this.setUsername = this.setUsername.bind(this);
@@ -37,16 +36,7 @@ class Login extends Component {
 
     register = (e) => {
         e.preventDefault();
-        this.setState({
-            showNotice: false
-        });
-
-        if(!registration(this.state.loginData, this.state.username, this.state.password)) {
-            this.setState({
-                showNotice: true,
-                error: 'User is already registered'
-            })
-        }
+        window.location.href = "http://"+window.location.hostname+":3000/registration";
     };
 
     logIn = (e) => {
@@ -60,7 +50,6 @@ class Login extends Component {
             window.location.href = "http://"+window.location.hostname+":3000";
         } else {
             this.setState({
-                showNotice: true,
                 error: 'Wrong username or password'
             })
         }
@@ -99,7 +88,7 @@ class Login extends Component {
                                 </InputGroup>
                             </Form>
                         </center>
-                            <div className={ this.state.showNotice ? 'wrongLogin' : 'hidden'}>
+                            <div className={ this.state.error === '' ? 'hidden' : 'wrongLogin'}>
                                 <FontAwesomeIcon icon={faTimes} /> {this.state.error}
                             </div>
                         <Button variant="primary" onClick={this.logIn} className="paddedButton">
