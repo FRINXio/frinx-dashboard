@@ -5,12 +5,9 @@ import {library} from '@fortawesome/fontawesome-svg-core';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faLock, faUser, faTimes} from '@fortawesome/free-solid-svg-icons';
 import logoWhite from '../img/logoWhite.png';
-import Papa from 'papaparse/papaparse.min.js';
-import csvFilePath from '../data/users.csv';
-import passwordHash from 'password-hash';
+import {authorisation, getLoginData, registration} from "../components/authorisation";
 
 class Login extends Component {
-
 
     constructor(props){
         super(props);
@@ -20,56 +17,51 @@ class Login extends Component {
             activePassword: false,
             password: '',
             username: '',
-            csvData: '',
-            showNotice: false
+            loginData: [],
+            showNotice: false,
+            error: ''
         };
         this.setUsername = this.setUsername.bind(this);
         this.setPassword = this.setPassword.bind(this);
+        this.register = this.register.bind(this);
         this.logIn = this.logIn.bind(this);
-        this.getData = this.getData.bind(this);
     }
 
     componentWillMount() {
-        Papa.parse(csvFilePath, {
-            header: true,
-            download: true,
-            skipEmptyLines: true,
-            complete: this.getData
-        });
+        getLoginData().then(result => (
+            this.setState({
+                loginData: result.result
+            })
+        ));
     }
 
-    getData(result) {
-        let data = result.data;
+    register = (e) => {
+        e.preventDefault();
         this.setState({
-            csvData: data
+            showNotice: false
         });
-    }
+
+        if(!registration(this.state.loginData, this.state.username, this.state.password)) {
+            this.setState({
+                showNotice: true,
+                error: 'User is already registered'
+            })
+        }
+    };
 
     logIn = (e) => {
         e.preventDefault();
-        let data = this.state.csvData;
-        let authentication = false;
-        let username = this.state.username;
-        let password = this.state.password;
-        let useremail = "";
-        data.forEach(item => {
-            if (username === item.name || username === item.email) {
-                if (passwordHash.verify(password, item.password)) {
-                    username = item.name;
-                    useremail = item.email;
-                    authentication = true;
-                }
-            }
-        });
-
-        if (authentication) {
+        if (authorisation(this.state.loginData, this.state.username, this.state.password)) {
+            let index =this.state.loginData.findIndex(
+                item => item.name === this.state.username || item.email === this.state.username);
             localStorage.setItem('loggedIn', true);
-            localStorage.setItem('email', useremail);
-            localStorage.setItem('name', username);
+            localStorage.setItem('email', this.state.loginData[index].email);
+            localStorage.setItem('name', this.state.loginData[index].name);
             window.location.href = "http://"+window.location.hostname+":3000";
         } else {
             this.setState({
-                showNotice: true
+                showNotice: true,
+                error: 'Wrong username or password'
             })
         }
     };
@@ -108,12 +100,12 @@ class Login extends Component {
                             </Form>
                         </center>
                             <div className={ this.state.showNotice ? 'wrongLogin' : 'hidden'}>
-                                <FontAwesomeIcon icon={faTimes} /> Wrong username or password
+                                <FontAwesomeIcon icon={faTimes} /> {this.state.error}
                             </div>
                         <Button variant="primary" onClick={this.logIn} className="paddedButton">
                             Sign in
                         </Button>
-                        <a href="#"><div className="smallText">Forgot your password?</div></a>
+                        <a href=""><div className="smallText">Forgot your password?</div></a>
                         <br /> or<br />
                         <Button variant="primary" onClick={this.props.logIn} className="paddedButton">
                             Sign in using Facebook
@@ -130,11 +122,11 @@ class Login extends Component {
                             Sign up using Facebook
                         </Button><br />
                         or<br />
-                        <Button className="btn-margin" variant="outline-light">
+                        <Button className="btn-margin" variant="outline-light" onClick={this.register}>
                             Register as a new user
                         </Button>
                         <br />
-                        <a href="https://frinx.io"><img className="logo" src={logoWhite}></img></a>
+                        <a href="https://frinx.io"><img className="logo" alt="Logo" src={logoWhite}></img></a>
                         </div>
                     </Col>
                 </Row>

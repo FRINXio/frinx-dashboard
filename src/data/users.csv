@@ -1,3 +1,2 @@
 name,email,password
-Gerhard,gwieser@frinx.io,sha1$e561d561$1$d6177230665956e0bb5a0b6461bc6b4077d923b2
-Tomas,thodor@frinx.io,sha1$6cfa7652$1$92cf1e9326f64e4812883c9364d177825300a3c3
+admin,Admin,sha1$b9482407$1$478d71f1df29a6e68f62ffa32af3557e78fc637c
