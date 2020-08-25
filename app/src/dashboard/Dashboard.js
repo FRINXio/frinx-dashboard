@@ -26,7 +26,7 @@ const PANELS = [
   {
     title: "Inventory & Logs",
     desc: "Manage network device configurations.",
-    link: "/inventory",
+    link: `${window.location.protocol}//${window.location.hostname}:5601`,
     icon: faBoxOpen,
     disabled: false,
   },
