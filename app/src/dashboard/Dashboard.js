@@ -12,7 +12,7 @@ const PANELS = [
   {
     title: "UniConfig",
     desc: "Manage network device configurations.",
-    link: "/uniconfig/ui",
+    link: "/service1",
     icon: faLaptopCode,
     disabled: false,
   },
@@ -33,9 +33,10 @@ const PANELS = [
   {
     title: "User Management",
     desc: "Manage users and permissions.",
-    link: "/users",
+    link: "https://aad.portal.azure.com",
+    external: true,
     icon: faUsers,
-    disabled: true,
+    disabled: false,
   },
 ];
 
@@ -52,6 +53,7 @@ function Dashboard() {
                 icon={p.icon}
                 style={{ background: "linear-gradient" }}
                 link={p.link}
+                external={p.external}
                 disabled={p.disabled}
               />
             </Col>

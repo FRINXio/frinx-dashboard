@@ -7,6 +7,7 @@ import Header from "./header/Header";
 const config = {
   auth: {
     clientId: "366fab79-6c61-4a24-8c2c-b2be2f48fe35",
+    redirectUri: "http://localhost:3000/",
   },
   cache: {
     cacheLocation: "localStorage",
