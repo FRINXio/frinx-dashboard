@@ -42,6 +42,13 @@ const UserNav = () => {
               >
                 Logout
               </Dropdown.Item>
+              <Dropdown.Item
+                onClick={() => {
+                  window.open("https://myaccount.microsoft.com/?client_id=" + authProps.accounts[0].localAccountId);
+                }}
+              >
+                Profile
+              </Dropdown.Item>
             </DropdownButton>
           );
         }}

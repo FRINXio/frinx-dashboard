@@ -7,7 +7,13 @@ function Panel(props) {
   const [highlight, setHighlight] = useState(false);
 
   return (
-    <div onClick={() => window.location = props.link}>
+    <div onClick={() => {
+      if (props.external === true) {
+        window.open(props.link);
+      } else {
+        window.location = props.link;
+      }
+    }}>
       {!props.disabled ? (
         <div
           className="panel"
