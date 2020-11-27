@@ -1,5 +1,6 @@
 import React from "react";
 import { Navbar } from "react-bootstrap";
+import UserNav from "./UserNav";
 import "./Header.css";
 import logo from "./logo-min.png";
 
@@ -9,6 +10,7 @@ const Header = () => {
       <Navbar.Brand href="/">
         <img src={logo} alt="logo" />
       </Navbar.Brand>
+      <UserNav />
     </Navbar>
   );
 };
