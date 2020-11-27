@@ -16,3 +16,7 @@
 .navbarHeader img {
   height: 30px;
 }
+
+.user-nav {
+  margin-left: auto;
+}

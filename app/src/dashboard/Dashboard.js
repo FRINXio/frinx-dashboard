@@ -45,7 +45,7 @@ function Dashboard() {
       <Row>
         {PANELS.map((p) => {
           return (
-            <Col>
+            <Col key={p.title}>
               <Panel
                 title={p.title}
                 desc={p.desc}
