@@ -2,6 +2,7 @@
   "name": "frinx-dashboard",
   "version": "0.1.0",
   "private": true,
+  "homepage": ".",
   "dependencies": {
     "@azure/msal-browser": "^2.7.0",
     "@azure/msal-react": "^1.0.0-alpha.0",
@@ -17,9 +18,9 @@
     "react-scripts": "3.4.3"
   },
   "scripts": {
-    "start": "PORT=5001 react-scripts start",
-    "start_dashboard": "PORT=5001 PUBLIC_URL=/dashboard react-scripts start",
-    "build": "react-scripts build",
+    "start": "react-scripts start",
+    "//":  "the '|| true' part is there to ignore error due to : 'mv: cannot move 'build/dashboard' to a subdirectory of itself, 'build/dashboard/dashboard''",
+    "build": "react-scripts build && mkdir build/dashboard && (mv build/* build/dashboard/ || true)",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
