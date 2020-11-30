@@ -8,35 +8,39 @@ import {
   faUsers,
 } from "@fortawesome/free-solid-svg-icons";
 
+function urlEnabled(envValue) {
+  return envValue === "true";
+}
+
 const PANELS = [
   {
     title: "UniConfig",
     desc: "Manage network device configurations.",
-    link: "/service1",
+    link: process.env.REACT_APP_URL_UNICONFIG,
     icon: faLaptopCode,
-    disabled: false,
+    disabled: !urlEnabled(process.env.REACT_APP_URL_UNICONFIG_ENABLED),
   },
   {
     title: "UniFlow",
     desc: "Create, organize and execute workflows.",
-    link: "/uniflow/ui",
+    link: process.env.REACT_APP_URL_UNIFLOW,
     icon: faCogs,
-    disabled: false,
+    disabled: !urlEnabled(process.env.REACT_APP_URL_UNIFLOW_ENABLED),
   },
   {
     title: "Inventory & Logs",
     desc: "Manage network device configurations.",
-    link: `${window.location.protocol}//${window.location.hostname}:5601`,
+    link: eval(process.env.REACT_APP_URL_INVENTORY),
     icon: faBoxOpen,
-    disabled: false,
+    disabled: !urlEnabled(process.env.REACT_APP_URL_INVENTORY_ENABLED),
   },
   {
     title: "User Management",
     desc: "Manage users and permissions.",
-    link: "https://aad.portal.azure.com",
+    link: process.env.REACT_APP_URL_USER_MGMT,
     external: true,
     icon: faUsers,
-    disabled: false,
+    disabled: !urlEnabled(process.env.REACT_APP_URL_USER_MGMT_ENABLED),
   },
 ];
 
