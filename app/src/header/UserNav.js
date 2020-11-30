@@ -30,8 +30,10 @@ const UserNav = () => {
         scopes: ["User.Read"],
       });
 
-      // TODO now the token is in localStorage and also in cookie ... is that OK ?
       authResultPromise.then(value => {
+        // Pushing JWT token to cookie (msal stores it in localStorage) in order to pass the token to api-gateway
+        //  api gateway needs to make sure the token is still valid
+        // TODO now the token is in localStorage and also in cookie ... is that OK ?
         setCookieWithToken(value);
       })
     }

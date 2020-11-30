@@ -5,6 +5,8 @@ import Dashboard from "./dashboard/Dashboard";
 import Header from "./header/Header";
 import {LogLevel} from "@azure/msal-common";
 import {authEnabled} from "./header/UserNav";
+import {NotificationContainer, NotificationManager} from 'react-notifications';
+import 'react-notifications/lib/notifications.css';
 
 const config = {
   auth: {
@@ -47,19 +49,54 @@ if (authEnabled()) {
   pca = new PublicClientApplication(config);
 }
 
-function App() {
-  if (authEnabled()) {
-    return (
-      <MsalProvider instance={pca}>
+function message() {
+  const urlParams = new URLSearchParams(window.location?.search);
+  const message = urlParams.get("message")
+  const messageLevel = urlParams.get("message_level")
+
+  // TODO this causes a warning in browser
+  // Warning: findDOMNode is deprecated in StrictMode. findDOMNode was passed an instance of Transition which is inside StrictMode. Instead, add a ref directly to the element you want to reference. Learn more about using refs safely here: https://fb.me/react-strict-mode-find-node
+
+  if (message) {
+    switch (messageLevel) {
+      default:
+      case 'info':
+        NotificationManager.info(message);
+        break;
+      case 'success':
+        NotificationManager.success(message);
+        break;
+      case 'warning':
+        NotificationManager.warning(message);
+        break;
+      case 'error':
+        NotificationManager.error(message);
+        break;
+    }
+  }
+}
+
+class App extends React.Component {
+  componentDidMount() {
+    message();
+  }
+
+  render() {
+    if (authEnabled()) {
+      return (
+        <MsalProvider instance={pca}>
+          <Header/>
+          <Dashboard/>
+          <NotificationContainer/>
+        </MsalProvider>
+      );
+    } else {
+      return (<>
         <Header/>
         <Dashboard/>
-      </MsalProvider>
-    );
-  } else {
-    return(<>
-      <Header />
-      <Dashboard />
-    </>);
+        <NotificationContainer correlationId="notificationContainer"/>
+      </>);
+    }
   }
 }
 
