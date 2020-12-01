@@ -8,39 +8,42 @@ import {
   faUsers,
 } from "@fortawesome/free-solid-svg-icons";
 
-function urlEnabled(envValue) {
-  return envValue === "true";
+function isURLDisabled(envValue) {
+  return envValue !== "true";
 }
 
 const PANELS = [
   {
     title: "UniConfig",
     desc: "Manage network device configurations.",
-    link: process.env.REACT_APP_URL_UNICONFIG,
+    url: process.env.REACT_APP_URL_UNICONFIG,
+    isExternal: false,
     icon: faLaptopCode,
-    disabled: !urlEnabled(process.env.REACT_APP_URL_UNICONFIG_ENABLED),
+    isDisabled: isURLDisabled(process.env.REACT_APP_URL_UNICONFIG_ENABLED),
   },
   {
     title: "UniFlow",
     desc: "Create, organize and execute workflows.",
-    link: process.env.REACT_APP_URL_UNIFLOW,
+    url: process.env.REACT_APP_URL_UNIFLOW,
+    isExternal: false,
     icon: faCogs,
-    disabled: !urlEnabled(process.env.REACT_APP_URL_UNIFLOW_ENABLED),
+    isDisabled: isURLDisabled(process.env.REACT_APP_URL_UNIFLOW_ENABLED),
   },
   {
     title: "Inventory & Logs",
     desc: "Manage network device configurations.",
-    link: eval(process.env.REACT_APP_URL_INVENTORY),
+    url: process.env.REACT_APP_URL_INVENTORY,
+    isExternal: false,
     icon: faBoxOpen,
-    disabled: !urlEnabled(process.env.REACT_APP_URL_INVENTORY_ENABLED),
+    isDisabled: isURLDisabled(process.env.REACT_APP_URL_INVENTORY_ENABLED),
   },
   {
     title: "User Management",
     desc: "Manage users and permissions.",
-    link: process.env.REACT_APP_URL_USER_MGMT,
-    external: true,
+    url: process.env.REACT_APP_URL_USER_MGMT,
+    isExternal: true,
     icon: faUsers,
-    disabled: !urlEnabled(process.env.REACT_APP_URL_USER_MGMT_ENABLED),
+    isDisabled: isURLDisabled(process.env.REACT_APP_URL_USER_MGMT_ENABLED),
   },
 ];
 
@@ -56,9 +59,9 @@ function Dashboard() {
                 desc={p.desc}
                 icon={p.icon}
                 style={{ background: "linear-gradient" }}
-                link={p.link}
-                external={p.external}
-                disabled={p.disabled}
+                url={p.url}
+                isExternal={p.isExternal}
+                isDisabled={p.isDisabled}
               />
             </Col>
           );
