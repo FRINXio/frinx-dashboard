@@ -4,8 +4,10 @@ import App from "./App";
 import { isAuthEnabled } from "./auth-helpers";
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App isAuthEnabled={isAuthEnabled()} />
-  </React.StrictMode>,
+  React.createElement(
+    React.StrictMode,
+    null,
+    React.createElement(App, { isAuthEnabled: isAuthEnabled() })
+  ),
   document.getElementById("root")
 );

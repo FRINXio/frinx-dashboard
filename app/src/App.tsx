@@ -1,4 +1,5 @@
-import React, { useEffect, useRef } from "react";
+import React, { FC, useEffect, useRef } from "react";
+import { PublicClientApplication } from "@azure/msal-browser";
 import { MsalProvider } from "@azure/msal-react";
 import Dashboard from "./dashboard/Dashboard";
 import Header from "./header/Header";
@@ -37,7 +38,9 @@ function setMessages() {
 }
 
 const AppWithAuth = () => {
-  const publicClientAppRef = useRef(createPublicClientApp());
+  const publicClientAppRef = useRef<PublicClientApplication>(
+    createPublicClientApp()
+  );
 
   return (
     <MsalProvider instance={publicClientAppRef.current}>
@@ -48,9 +51,8 @@ const AppWithAuth = () => {
   );
 };
 
-const App = ({ isAuthEnabled }) => {
+const App: FC<{ isAuthEnabled: boolean }> = ({ isAuthEnabled }) => {
   useEffect(() => {
-    console.log("effect");
     setMessages();
   }, []);
 
