@@ -5,45 +5,34 @@ import {
   useMsal,
 } from "@azure/msal-react";
 import { Button, Dropdown, DropdownButton } from "react-bootstrap";
+import { setTokenCookie, removeTokenCookie } from "../auth-helpers";
 import "./Header.css";
-
-// Set ID token (JWT) to cookie
-function setCookieWithToken(value) {
-  document.cookie = `BearerToken=${value.idToken}; SameSite=None; Secure; path=/`;
-}
-
-function removeCookieToken() {
-  document.cookie = `BearerToken=;  expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/`;
-}
-
-export function authEnabled() {
-  return process.env.REACT_APP_AUTH_ENABLED === "true";
-}
 
 const UserNav = () => {
   const { instance, accounts, inProgress } = useMsal();
   useEffect(() => {
     if (inProgress === "none" && accounts.length > 0) {
-
       const authResultPromise = instance.acquireTokenSilent({
         account: accounts[0],
         scopes: ["User.Read"],
       });
 
-      authResultPromise.then(value => {
+      authResultPromise.then((value) => {
         // Pushing JWT token to cookie (msal stores it in localStorage) in order to pass the token to api-gateway
         //  api gateway needs to make sure the token is still valid
         // TODO now the token is in localStorage and also in cookie ... is that OK ?
-        setCookieWithToken(value);
-      })
+        setTokenCookie(value.idToken);
+      });
     }
-  }, [inProgress, accounts, instance]);
+    // there seems to be a bug when adding `accounts` to this deps array (it makes it run infinitely)
+    // we will not add them for now
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [inProgress, instance]);
 
   return (
     <div className="user-nav">
       <UnauthenticatedTemplate>
         <Button
-          disabled={!authEnabled()}
           onClick={() => {
             instance.loginPopup({
               scopes: ["openid", "profile", "User.Read.All"],
@@ -55,27 +44,30 @@ const UserNav = () => {
       </UnauthenticatedTemplate>
       <AuthenticatedTemplate>
         {(authProps) => {
+          const [currentAccount] = authProps.accounts;
           return (
-            <DropdownButton title={authProps.accounts[0].username} alignRight>
+            <DropdownButton title={currentAccount.username} alignRight>
               <Dropdown.Item
-                onClick={() => {
-                  try {
-                    instance.logout();
-                  } catch(e) {
-                    throw e;
-                  } finally {
-                    removeCookieToken();
-                  }
-                }}
+                as="a"
+                href={`https://myaccount.microsoft.com/?client_id=${currentAccount.localAccountId}`}
+                target="_blank"
+                rel="noopener noreferrer"
               >
-                Logout
+                Profile
               </Dropdown.Item>
               <Dropdown.Item
                 onClick={() => {
-                  window.open("https://myaccount.microsoft.com/?client_id=" + authProps.accounts[0].localAccountId);
+                  instance
+                    .logout()
+                    .catch((e) => {
+                      console.error(e);
+                    })
+                    .finally(() => {
+                      removeTokenCookie();
+                    });
                 }}
               >
-                Profile
+                Logout
               </Dropdown.Item>
             </DropdownButton>
           );

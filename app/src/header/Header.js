@@ -4,13 +4,13 @@ import UserNav from "./UserNav";
 import "./Header.css";
 import logo from "./logo-min.png";
 
-const Header = () => {
+const Header = ({ isAuthEnabled }) => {
   return (
     <Navbar className="navbarHeader">
       <Navbar.Brand href={process.env.PUBLIC_URL}>
         <img src={logo} alt="logo" />
       </Navbar.Brand>
-      <UserNav />
+      {isAuthEnabled ? <UserNav /> : null}
     </Navbar>
   );
 };
