@@ -1,15 +1,25 @@
-import React, { useState } from "react";
+import React, { CSSProperties, FC, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlay } from "@fortawesome/free-solid-svg-icons";
+import { faPlay, IconDefinition } from "@fortawesome/free-solid-svg-icons";
 import "./Panel.css";
 
-function Panel(props) {
+type Props = {
+  title: string;
+  description: string;
+  icon: IconDefinition;
+  style: CSSProperties;
+  url: string | undefined;
+  isExternal: boolean;
+  isDisabled: boolean;
+};
+
+const Panel: FC<Props> = (props) => {
   const [highlight, setHighlight] = useState(false);
 
   return props.isDisabled ? (
     <div style={{ boxShadow: "none" }} className="panel disabledPanel">
       <div className="title">{props.title}</div>
-      <div className="desc">{props.desc}</div>
+      <div className="desc">{props.description}</div>
       <div className={!highlight ? "icon" : "icon lightened"}>
         <FontAwesomeIcon icon={props.icon} />
       </div>
@@ -31,7 +41,7 @@ function Panel(props) {
         }}
       >
         <div className="title">{props.title}</div>
-        <div className="desc">{props.desc}</div>
+        <div className="desc">{props.description}</div>
         <div className={!highlight ? "icon" : "icon lightened"}>
           <FontAwesomeIcon icon={props.icon} />
         </div>
@@ -41,6 +51,6 @@ function Panel(props) {
       </div>
     </a>
   );
-}
+};
 
 export default Panel;

@@ -43,7 +43,12 @@ const UserNav = () => {
         </Button>
       </UnauthenticatedTemplate>
       <AuthenticatedTemplate>
-        {(authProps) => {
+        {
+          // TODO: fix types (it seems like a bug in type definitions in the library)
+        }
+        {(authProps: {
+          accounts: { username: string; localAccountId: string }[];
+        }) => {
           const [currentAccount] = authProps.accounts;
           return (
             <DropdownButton title={currentAccount.username} alignRight>
