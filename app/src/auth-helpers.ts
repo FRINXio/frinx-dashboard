@@ -1,20 +1,20 @@
 import { LogLevel } from "@azure/msal-common";
-import { PublicClientApplication } from "@azure/msal-browser";
+import { PublicClientApplication, Configuration } from "@azure/msal-browser";
 
 // Set ID token (JWT) to cookie
-export function setTokenCookie(token) {
+export function setTokenCookie(token: string): void {
   document.cookie = `BearerToken=${token}; SameSite=None; Secure; path=/`;
 }
 
-export function removeTokenCookie() {
+export function removeTokenCookie(): void {
   document.cookie = `BearerToken=;  expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/`;
 }
 
-export function isAuthEnabled() {
+export function isAuthEnabled(): boolean {
   return process.env.REACT_APP_AUTH_ENABLED === "true";
 }
 
-const authConfig = {
+const authConfig: Configuration = {
   auth: {
     clientId: process.env.REACT_APP_AD_CLIENT_ID || "",
     redirectUri:
@@ -51,6 +51,6 @@ const authConfig = {
   },
 };
 
-export function createPublicClientApp() {
+export function createPublicClientApp(): PublicClientApplication {
   return new PublicClientApplication(authConfig);
 }

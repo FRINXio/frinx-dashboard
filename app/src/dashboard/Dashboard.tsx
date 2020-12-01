@@ -8,14 +8,14 @@ import {
   faUsers,
 } from "@fortawesome/free-solid-svg-icons";
 
-function isURLDisabled(envValue) {
+function isURLDisabled(envValue: string | undefined) {
   return envValue !== "true";
 }
 
 const PANELS = [
   {
     title: "UniConfig",
-    desc: "Manage network device configurations.",
+    description: "Manage network device configurations.",
     url: process.env.REACT_APP_URL_UNICONFIG,
     isExternal: false,
     icon: faLaptopCode,
@@ -23,7 +23,7 @@ const PANELS = [
   },
   {
     title: "UniFlow",
-    desc: "Create, organize and execute workflows.",
+    description: "Create, organize and execute workflows.",
     url: process.env.REACT_APP_URL_UNIFLOW,
     isExternal: false,
     icon: faCogs,
@@ -31,7 +31,7 @@ const PANELS = [
   },
   {
     title: "Inventory & Logs",
-    desc: "Manage network device configurations.",
+    description: "Manage network device configurations.",
     url: process.env.REACT_APP_URL_INVENTORY,
     isExternal: false,
     icon: faBoxOpen,
@@ -39,7 +39,7 @@ const PANELS = [
   },
   {
     title: "User Management",
-    desc: "Manage users and permissions.",
+    description: "Manage users and permissions.",
     url: process.env.REACT_APP_URL_USER_MGMT,
     isExternal: true,
     icon: faUsers,
@@ -56,7 +56,7 @@ function Dashboard() {
             <Col key={p.title}>
               <Panel
                 title={p.title}
-                desc={p.desc}
+                description={p.description}
                 icon={p.icon}
                 style={{ background: "linear-gradient" }}
                 url={p.url}
