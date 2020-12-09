@@ -28,7 +28,7 @@ const PANELS = [
     desc: "Manage network device configurations.",
     link: `${window.location.protocol}//${window.location.hostname}:5601`,
     icon: faBoxOpen,
-    disabled: false,
+    disabled: true,
   },
   {
     title: "User Management",
@@ -51,7 +51,7 @@ function Dashboard() {
                 desc={p.desc}
                 icon={p.icon}
                 style={{ background: "linear-gradient" }}
-                link={p.link}
+                link={p.disabled ? "/" : p.link}
                 disabled={p.disabled}
               />
             </Col>
