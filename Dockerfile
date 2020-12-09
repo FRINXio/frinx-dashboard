@@ -1,6 +1,6 @@
 # --- Build UI ---
 
-FROM node:9.4.0-alpine as client
+FROM node:14.15.1-alpine as client
 ENV SASS_BINARY_NAME linux-x64-59
 WORKDIR /usr/app/app/
 COPY app/package*.json ./
