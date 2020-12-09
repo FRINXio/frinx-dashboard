@@ -11,6 +11,7 @@ RUN npm run build
 # --- Setup UI server
 
 FROM node:9.4.0-alpine as server
+RUN apk --no-cache add curl
 WORKDIR /usr/app/server/
 COPY --from=client /usr/app/app/build/ ./build
 COPY server/package*.json ./
